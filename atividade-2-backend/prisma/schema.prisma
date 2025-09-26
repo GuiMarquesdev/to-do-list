@@ -23,7 +23,7 @@ datasource db {
 
  model TaskHistory {
   id String @id @default(cuid())
-  ext String
+  text String
   taskId String
   createdAt DateTime @default(now()) @map("created_at")
 
