@@ -1,6 +1,7 @@
 import { Prisma, Task } from "@prisma/client";
-import { TasksRepository } from "../task-history-repository";
+import { TasksRepository } from "../tasks-repository"; // CORREÇÃO: Importa a interface correta
 import { prisma } from "../../lib/prisma";
+
 export class PrismaTaskRepository implements TasksRepository {
   async create(data: Prisma.TaskCreateInput): Promise<Task> {
     const task = await prisma.task.create({
@@ -26,7 +27,7 @@ export class PrismaTaskRepository implements TasksRepository {
     return task;
   }
   async delete(id: string): Promise<void> {
-    const task = await prisma.task.delete({
+    await prisma.task.delete({
       where: { id },
     });
   }

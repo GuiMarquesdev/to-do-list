@@ -1,5 +1,5 @@
 import { Task } from "@prisma/client";
-import { TasksRepository } from "../repositories/task-history-repository";
+import { TasksRepository } from "../repositories/tasks-repository";
 
 interface ListTasksResponse {
   tasks: Task[];
