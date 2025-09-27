@@ -1,5 +1,5 @@
-import { TaskHistoryRepository } from "../repositories/prisma-task-history-repository";
 import { TaskHistory } from "@prisma/client";
+import { TaskHistoryRepository } from "../repositories/task-history-repository";
 
 type ActionType = "CREATED" | "UPDATED" | "DELETED" | "TOGGLED";
 
@@ -25,7 +25,7 @@ export class CreateTaskHistoryService {
 
     const taskHistory = await this.taskHistoryRepository.create({
       taskId,
-      ext: historyEntryText,
+      message: historyEntryMessage,
     });
 
     return { taskHistory };

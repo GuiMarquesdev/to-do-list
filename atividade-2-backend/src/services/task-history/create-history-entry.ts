@@ -1,7 +1,6 @@
 import { TaskHistory } from "@prisma/client";
 import { TaskHistoryRepository } from "../../repositories/task-history-repository";
-
-export type ActionType = "CREATED" | "UPDATED" | "DELETED" | "TOGGLED";
+import { ActionType } from "./fetch-task-history"; // CORREÇÃO: Importa ActionType do arquivo de onde ele deve vir
 
 interface CreateTaskHistoryRequest {
   taskId: string;
@@ -21,11 +20,11 @@ export class CreateHistoryEntryService {
     action,
     taskText,
   }: CreateTaskHistoryRequest): Promise<CreateTaskHistoryResponse> {
-    const historyEntryText = `${action}: ${taskText}`;
+    const historyEntryMessage = `${action}: ${taskText}`;
 
     const taskHistory = await this.taskHistoryRepository.create({
       taskId,
-      ext: historyEntryText,
+      message: historyEntryMessage,
     });
 
     return { taskHistory };
