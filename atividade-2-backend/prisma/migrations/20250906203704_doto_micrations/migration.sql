@@ -11,7 +11,7 @@ CREATE TABLE "public"."Task" (
 -- CreateTable
 CREATE TABLE "public"."task_history" (
     "id" TEXT NOT NULL,
-    "ext" TEXT NOT NULL,
+    "text" TEXT NOT NULL,
     "taskId" TEXT NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 

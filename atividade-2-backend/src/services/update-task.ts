@@ -15,7 +15,7 @@ export class UpdateTaskService {
   async execute({ id, data }: UpdateTaskRequest): Promise<UpdateTaskResponse> {
     const existingTask = await this.tasksRepository.findById(id);
     if (!existingTask) {
-      throw new Error();
+      throw new ResourceNotFoundError();
     }
     const updatedTask = await this.tasksRepository.update(id, data);
     return { task: updatedTask };

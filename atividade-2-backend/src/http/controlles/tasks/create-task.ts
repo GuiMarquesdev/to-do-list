@@ -23,7 +23,8 @@ export async function createTask(request: FastifyRequest, reply: FastifyReply) {
     return reply.status(201).send({
       task: {
         id: task.id,
-        title: task.text,
+        // CORREÇÃO: 'title: task.text' para 'text: task.text'
+        text: task.text,
         completed: task.completed,
         createdAt: task.createdAt,
       },

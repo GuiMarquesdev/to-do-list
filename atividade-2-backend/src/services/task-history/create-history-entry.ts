@@ -1,6 +1,12 @@
 import { TaskHistory } from "@prisma/client";
 import { TaskHistoryRepository } from "../../repositories/task-history-repository";
-import { ActionType } from "./fetch-task-history"; // CORREÇÃO: Importa ActionType do arquivo de onde ele deve vir
+
+type ActionType =
+  | "CREATED"
+  | "UPDATED"
+  | "DELETED"
+  | "TOGGLED"
+  | "CLEAR_COMPLETED";
 
 interface CreateTaskHistoryRequest {
   taskId: string;
@@ -23,8 +29,10 @@ export class CreateHistoryEntryService {
     const historyEntryMessage = `${action}: ${taskText}`;
 
     const taskHistory = await this.taskHistoryRepository.create({
-      taskId,
-      message: historyEntryMessage,
+      task: {
+        connect: { id: taskId },
+      },
+      ext: historyEntryMessage, // NÃO ENCONTREI O SCHIMIA CERTO PARA ARUMAR O ERRO DE DIGITAÇÃO EXT PARA TEXT
     });
 
     return { taskHistory };
